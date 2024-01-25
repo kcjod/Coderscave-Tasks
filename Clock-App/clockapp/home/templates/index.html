@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Clock</title>
+<style>
+  body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: black;
+    color: #fff;
+    margin: 0;
+  }
+  
+  #clock {
+    font-size: 9rem;
+  }
+  #date{
+    font-size: 2rem;
+  }
+  #footer{
+    position: absolute;
+    bottom: 5%;
+    color: rgb(56, 56, 56);
+  }
+</style>
+</head>
+<body>
+    <div id="clock"></div>
+    <div id="date"></div>
+    <div id="footer">This project shows the local time of user based on device.</div>
+<script>
+  function updateTime() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    document.getElementById('clock').textContent = timeString;
+
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = now.toLocaleDateString('en-US', options);
+    document.getElementById('date').textContent = dateString;
+  }
+  
+  updateTime(); // Call initially to prevent delay
+  
+  setInterval(updateTime, 1000); // Update time every second
+</script>
+</body>
+</html>
